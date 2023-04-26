@@ -1,65 +1,51 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: USER
+ * Date: 4/19/2018
+ * Time: 3:28 PM
+ */
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Food;
+use App\Models\FoodCategory;
 use Illuminate\Http\Request;
 
 class FoodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    private function code()
+    {
+        $product_code = Food::orderBy('id', 'desc')->pluck('code');
+        if (empty($product_code)) {
+            $product_code = 'F1000001';
+        } else {
+            $product_code = str_replace('F', '', $product_code);
+            $product_code = 'F'.(intval($product_code) + 1);
+        }
+
+        return $product_code;
+    }
+
     public function index()
     {
-        //
+        return view('admin.food.index')->with([
+            'foods'=>Food::get(),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.food.create')->with([
+            'categories'=>FoodCategory::get()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Food $food)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Food $food)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Food $food)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Food $food)
-    {
-        //
+        $request->merge(['code'=>$this->code()]);
+        Food::create($request->except('_token'));
+        return redirect('food');
     }
 }

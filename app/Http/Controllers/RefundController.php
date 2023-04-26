@@ -2,63 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Product;
 use App\Models\Refund;
 use Illuminate\Http\Request;
 
 class RefundController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $products = Refund::all();
+
+        return view('admin.refund.index')
+            ->with(compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        $customer = Customer::get(['id', 'name']);
+        $products = Product::get(['code', 'title']);
+
+        return view('admin.refund.create')
+            ->with(compact('customer', 'products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function store()
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Refund $refund)
+
+    public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Refund $refund)
+
+    public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Refund $refund)
+
+    public function update($id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Refund $refund)
+
+    public function destroy($id)
     {
         //
     }

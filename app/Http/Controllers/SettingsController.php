@@ -2,64 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Config;
 use App\Models\Settings;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SettingsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        return view('admin.settings.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function password(Request $request)
     {
-        //
+        $input = $request->all();
+        if ($input['new_password'] = $input['confirm_password']) {
+            $current_pass = User::where('id', Auth::user()->id)
+                ->pluck('password');
+            if (password_verify($input['new_password'], $current_pass)) {
+                User::where('id', Auth::user()->id)->update(['password' => bcrypt($input['new_password'])]);
+
+                return redirect('/settings');
+            } else {
+                return redirect('/settings');
+            }
+        } else {
+            return redirect('/settings');
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Settings $settings)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Settings $settings)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Settings $settings)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Settings $settings)
-    {
-        //
+        $config = new Config();
+        $config->where('title','currency')->update(['value'=>$request->currency]);
+        return redirect('/settings');
     }
 }

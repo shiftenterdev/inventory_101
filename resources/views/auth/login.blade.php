@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Stocart</title>
-    <base href="/" />
+    <base href="{{route('admin.login')}}" />
     <link rel="icon" type="image/png" href="{{asset('warehouse.png')}}">
     <link rel="stylesheet" href="{{asset('admin/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/css/bb.css')}}">
@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-6 lP">
             <div class="text-center">
-                <img src="/warehouse.png" style="width: 100px;margin-bottom: 0px" alt="">
+                <img src="{{asset('warehouse.png')}}" style="width: 100px;margin-bottom: 0px" alt="">
             </div>
             <div class="panel panel-info ">
 
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form action="auth" class="form-horizontal" method="post">
+                    <form action="{{route('login.post')}}" class="form-horizontal" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <label for="inputEmail" class="col-lg-3 control-label">Email</label>
