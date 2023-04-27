@@ -10,7 +10,7 @@
         <fieldset>
             <legend>
                 Brand List
-                <a href="brand/create" class="btn btn-sm btn-primary nB pull-right openRight">
+                <a href="{{route('brand.create')}}" class="btn btn-sm btn-primary nB pull-right openRight">
                     <i class="fa fa-plus"></i> New Brand</a>
             </legend>
             <table class="table table-bordered">

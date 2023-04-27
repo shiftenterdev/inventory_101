@@ -17,7 +17,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search">
+                        <input type="search" class="form-control" placeholder="{{__('Search')}}">
                     </div>
                     <button type="submit" class="btn btn-info"><i class="fa fa-search"></i>{{__('Search')}}</button>
                 </form>
@@ -33,15 +33,15 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <i class="fa fa-user-md"></i> {{Auth::user()->name}}
+                        <i class="fa fa-user-md"></i> {{auth()->user()->name}}
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{route('user.index')}}">Users</a></li>
-                        <li><a href="{{route('product.index')}}">Products</a></li>
+                        <li><a href="{{route('user.index')}}">{{__('Users')}}</a></li>
+                        <li><a href="{{route('product.index')}}">{{__('Products')}}</a></li>
                         <li class="divider"></li>
-                        <li><a href="settings/update-password">Update Password</a></li>
+                        <li><a href="settings/update-password">{{__('Update Password')}}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{route('logout')}}">Logout</a></li>
+                        <li><a href="{{route('logout')}}">{{__('Logout')}}</a></li>
                     </ul>
                 </li>
             </ul>

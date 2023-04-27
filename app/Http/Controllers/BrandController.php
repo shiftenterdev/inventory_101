@@ -63,34 +63,19 @@ class BrandController extends Controller
             ->with(compact('brand'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function update($id, Request $request)
+    public function update(Brand $brand, Request $request)
     {
-        $input = $request->except('_token');
-        Brand::where('id', $id)->update($input);
+        $brand->update(['title'=>$request->title]);
 
-        return redirect('/brand')
+        return redirect()->route('brand.index')
             ->with('success', 'Brand Updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function delete($id)
+    public function delete(Brand $brand)
     {
-        Brand::destroy($id);
+        $brand->delete();
 
-        return redirect('/brand')
+        return redirect()->route('brand.index')
             ->with('success', 'Brand Deleted Successfully');
     }
 }

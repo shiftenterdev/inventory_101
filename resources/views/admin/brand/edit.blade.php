@@ -11,11 +11,12 @@
             <legend>
                 Update Brand
             </legend>
-            <form action="brand/update/{{$brand->id}}" class="form-horizontal" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <form action="{{route('brand.update',$brand->id)}}" class="form-horizontal" method="post">
+                @csrf
+                @method('PUT')
 
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Title</label>
+                    <label class="col-lg-2 control-label">{{__('Title')}}</label>
 
                     <div class="col-lg-6">
                         <input class="form-control" placeholder="Title" type="text" name="title" value="{{$brand->title}}" required>
@@ -23,7 +24,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Image</label>
+                    <label class="col-lg-2 control-label">{{__('Image')}}</label>
 
 
                     <div class="col-lg-7">
@@ -42,7 +43,7 @@
 
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">{{__('Update')}}</button>
                     </div>
                 </div>
             </form>
