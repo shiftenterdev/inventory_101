@@ -9,6 +9,7 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
@@ -35,10 +36,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('auth.login');
-//});
-
 Route::get('login', [AuthController::class, 'login'])
     ->name('admin.login');
 
@@ -64,6 +61,9 @@ Route::get('logout', [AuthController::class, 'logout'])
 Route::middleware('backend.auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])
         ->name('admin.dashboard');
+
+    Route::get('language/{locale}', [LanguageController::class, 'index'])
+        ->name('language');
 
     Route::resource('product', ProductController::class);
     Route::resource('sales', SalesController::class);

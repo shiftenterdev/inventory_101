@@ -24,24 +24,28 @@ class SettingsController extends Controller
     {
         $input = $request->all();
         if ($input['new_password'] = $input['confirm_password']) {
-            $current_pass = User::where('id', Auth::user()->id)
+            $current_pass = User::where('id', auth()->user()->id)
                 ->pluck('password');
             if (password_verify($input['new_password'], $current_pass)) {
-                User::where('id', Auth::user()->id)->update(['password' => bcrypt($input['new_password'])]);
+                User::where('id', auth()->user()->id)->update(['password' => bcrypt($input['new_password'])]);
 
-                return redirect('/settings');
+                return redirect()->route('settings.index');
             } else {
-                return redirect('/settings');
+                return redirect()->route('settings.index');
             }
         } else {
-            return redirect('/settings');
+            return redirect()->route('settings.index');
         }
     }
 
     public function store(Request $request)
     {
+        $requestData = $request->except('_token');
         $config = new Config();
-        $config->where('title','currency')->update(['value'=>$request->currency]);
-        return redirect('/settings');
+        foreach ($requestData as $data => $value){
+            $config->where('title',$data)->update(['value'=>$value]);
+        }
+        return redirect()->route('settings.index')
+            ->with('success','Seetings updated');
     }
 }

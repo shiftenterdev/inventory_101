@@ -14,5 +14,5 @@ use Illuminate\Database\Eloquent\Model;
 class FoodCategory extends Model
 {
     protected $table = 'food_categories';
-    protected $guarded = [];
+    protected $fillable = ['title'];
 }

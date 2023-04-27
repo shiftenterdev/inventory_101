@@ -11,7 +11,7 @@
         <fieldset>
             <legend>
                 Food Category List
-                <a href="food/category/create" class="btn btn-sm btn-primary nB pull-right"><i class="fa fa-plus"></i> New
+                <a href="{{route('food-category.create')}}" class="btn btn-sm btn-primary nB pull-right"><i class="fa fa-plus"></i> New
                     Food Category</a>
             </legend>
             <table class="table table-bordered">
@@ -29,9 +29,9 @@
                         <td>{{$p->title}}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="food/category/edit/{{$p->id}}" class="btn btn-sm btn-warning"><i
+                                <a href="{{route('food-category.edit',$p->id)}}" class="btn btn-sm btn-warning"><i
                                             class="fa fa-pencil"></i></a>
-                                <a href="food/category/delete/{{$p->id}}" class="btn btn-sm btn-danger confirm"><i
+                                <a href="{{route('food-category.destroy',$p->id)}}" class="btn btn-sm btn-danger confirm"><i
                                             class="fa fa-trash"></i></a>
                             </div>
                         </td>

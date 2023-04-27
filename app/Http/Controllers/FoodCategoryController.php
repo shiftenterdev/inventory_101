@@ -31,4 +31,19 @@ class FoodCategoryController extends Controller
         FoodCategory::create($request->except('_token'));
         return redirect('food/category');
     }
+
+    public function edit(FoodCategory $foodCategory)
+    {
+        return view('admin.food.category.edit')
+            ->with(compact('foodCategory'));
+    }
+
+    public function update(Request $request, FoodCategory $foodCategory)
+    {
+        $foodCategory->update(['title'=>$request->title]);
+        return redirect()->route('food-category.index')
+            ->with([
+                'success'=>'Food category updated'
+            ]);
+    }
 }
