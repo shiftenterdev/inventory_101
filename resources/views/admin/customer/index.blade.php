@@ -11,7 +11,7 @@
         <fieldset>
             <legend>
                 Customer List
-                <a href="customer/create" class="btn btn-sm btn-primary nB pull-right">
+                <a href="{{route('customers.create')}}" class="btn btn-sm btn-primary nB pull-right">
                     <i class="fa fa-plus"></i> New Customer</a>
             </legend>
             <table class="table table-bordered">
@@ -38,7 +38,7 @@
                         <td>{{currency($c->balance)}}</td>
                         <td>{!! $c->status==1?'<i class="fa fa-check"></i>':'<i class="fa fa-times"></i>' !!}</td>
                         <td>
-                                <a href="customer/edit/{{$c->id}}" class="btn btn-xs btn-info"><i
+                                <a href="{{route('customers.edit',$c->id)}}" class="btn btn-xs btn-info"><i
                                             class="fa fa-pencil"></i> Edit</a>
                             <a href="customer/payment/{{$c->id}}" class="btn btn-xs btn-success"><i
                                             class="fa fa-money"></i> Payment</a>

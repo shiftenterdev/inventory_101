@@ -11,8 +11,9 @@
             <legend>
                 Update Customer
             </legend>
-            <form action="customer/update/{{$customer->id}}" class="form-horizontal" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <form action="{{route('customers.update',$customer->id)}}" class="form-horizontal" method="post">
+                @csrf
+                @method('PUT')
 
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Name</label>

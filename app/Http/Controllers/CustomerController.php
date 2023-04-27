@@ -13,93 +13,62 @@ class CustomerController extends Controller
         $this->middleware('access:customer');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+
     public function index()
     {
         $customers = Customer::all();
 
         return view('admin.customer.index')
-                ->with(compact('customers'));
+            ->with(compact('customers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+
     public function create()
     {
         return view('admin.customer.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
     public function store(Request $request)
     {
-        $request->merge(['customer_no'=>CoreTrait::customerId()]);
+        $request->merge(['customer_no' => CoreTrait::customerId()]);
         Customer::create($request->except('_token'));
 
         return redirect('/customer')
-                ->with('success', 'Customer Added');
+            ->with('success', 'Customer Added');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function edit($id)
+
+    public function edit(Customer $customer)
     {
-        $customer = Customer::find($id);
         $image = CoreTrait::imageById($customer->customer_logo_id);
 
         return view('admin.customer.edit')
-                ->with(compact('customer', 'image'));
+            ->with(compact('customer', 'image'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function update($id, Request $request)
+
+    public function update(Customer $customer, Request $request)
     {
-        Customer::where('id', $id)->update($request->except('_token'));
+        $customer->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
+            'status' => $request->status,
+            'balance' => $request->balance,
+        ]);
 
-        return redirect('/customer')
-                ->with('success', 'Customer Updated');
+        return redirect()->route('customers.index')
+            ->with('success', 'Customer Updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+
 //    public function delete($id)
 //    {
 //        Customer::destroy($id);
@@ -110,8 +79,8 @@ class CustomerController extends Controller
 
     public function search(Request $request)
     {
-        return Customer::where('mobile','LIKE','%'.$request->term.'%')
-            ->select('id','mobile','name','address','email')
+        return Customer::where('mobile', 'LIKE', '%'.$request->term.'%')
+            ->select('id', 'mobile', 'name', 'address', 'email')
             ->get()
             ->toArray();
     }
