@@ -8,7 +8,7 @@
         <i class="fa fa-money"></i> Invoice Payment</a>
     <hr>
 
-    <a href="{{route('sales.index')}}" class="list-group-item {{Request::is('seles')?'active':''}}">
+    <a href="{{route('sales.index')}}" class="list-group-item {{Request::is('sales')?'active':''}}">
         <i class="fa fa-list-alt"></i> Sales List</a>
     <a href="{{route('purchase.index')}}" class="list-group-item {{Request::is('purchase')?'active':''}}">
         <i class="fa fa-list-ul"></i> Purchase List</a>
@@ -19,19 +19,19 @@
         <i class="fa fa-tasks"></i> Food Category</a>
     <a href="{{route('table.index')}}" class="list-group-item {{Request::is('table')?'active':''}}">
         <i class="fa fa-cutlery"></i> Table</a>
-    {{-- <a href="bill" class="list-group-item {{Request::is('bill')?'active':''}}">
-        <i class="fa fa-file-text"></i> Bill</a> --}}
+    <a href="bill" class="list-group-item {{Request::is('bill')?'active':''}}">
+        <i class="fa fa-file-text"></i> Bill</a>
     <hr>
     <a href="{{route('brand.index')}}" class="list-group-item {{Request::segment(1)=='brand'?'active':''}}">
         <i class="fa fa-contao"></i> Brand</a>
-    <a href="category" class="list-group-item {{Request::segment(1)=='category'?'active':''}}">
+    <a href="{{route('category.index')}}" class="list-group-item {{Request::segment(1)=='category'?'active':''}}">
         <i class="fa fa-clone"></i> Category</a>
     <a href="{{route('product.index')}}" class="list-group-item {{Request::segment(1)=='product'?'active':''}}">
         <i class="fa fa-cube"></i> Product</a>
     <a href="{{route('discount.index')}}" class="list-group-item {{Request::segment(1)=='discount'?'active':''}}">
         <i class="fa fa-crop"></i> Discount</a>
     <hr>
-    <a href="report" class="list-group-item {{Request::segment(1)=='report'?'active':''}}">
+    <a href="{{route('report.index')}}" class="list-group-item {{Request::segment(1)=='report'?'active':''}}">
         <i class="fa fa-bar-chart"></i> Report</a>
 
     <hr>

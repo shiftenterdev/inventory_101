@@ -4,8 +4,8 @@
 @section('content')
 
     <ul class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li class="active">Permission</li>
+        <li><a href="#">{{__('Home')}}</a></li>
+        <li class="active">{{__('Permission')}}</li>
     </ul>
     <div class="cN">
         <fieldset>
@@ -13,17 +13,17 @@
                 Add Role
             </legend>
             <form action="{{route('permission.store')}}" class="form-horizontal" method="post">
-                {{csrf_field()}}
+                @csrf
 
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Permission</label>
+                    <label class="col-lg-2 control-label">{{__('Permission')}}</label>
 
                     <div class="col-lg-6">
-                        <input class="form-control" placeholder="Permission" type="text" name="title">
+                        <input class="form-control" placeholder="{{__('Permission')}}" type="text" name="title">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Slug</label>
+                    <label class="col-lg-2 control-label">{{__('Slug')}}</label>
 
                     <div class="col-lg-6">
                         <input class="form-control" placeholder="Slug" type="text" name="slug">

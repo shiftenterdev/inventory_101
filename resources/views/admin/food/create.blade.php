@@ -1,6 +1,5 @@
 @extends('admin.layout.index')
 
-
 @section('content')
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
@@ -11,9 +10,8 @@
             <legend>
                 Add Food
             </legend>
-            <form action="food/store" class="form-horizontal" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+            <form action="{{route('food.store')}}" class="form-horizontal" method="post">
+                @csrf
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Category</label>
 
@@ -29,21 +27,21 @@
 
 
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Title</label>
+                    <label class="col-lg-2 control-label">{{__('Title')}}</label>
 
                     <div class="col-lg-8">
                         <input class="form-control" placeholder="Title" type="text" name="title">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Description</label>
+                    <label class="col-lg-2 control-label">{{__('Description')}}</label>
 
                     <div class="col-lg-8">
                         <textarea name="description" class="form-control" placeholder="Description" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Price</label>
+                    <label class="col-lg-2 control-label">{{__('Price')}}</label>
 
                     <div class="col-lg-8">
                         <input class="form-control" placeholder="Price" type="text" name="price">
@@ -95,10 +93,6 @@
 
 @section('script')
     @parent
-    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
-    <script>
-        var prefix = "{{config('lfm.url_prefix')}}";
-        $('#thumbnail').filemanager('image', {prefix: prefix});
-    </script>
+    @include('admin.layout.js.lfm-standalone')
 @stop
 

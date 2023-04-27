@@ -33,9 +33,9 @@
                         <td>{{$b->discount}}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="discount/edit/{{$b->id}}" class="btn btn-sm btn-warning"><i
+                                <a href="{{route('discount.edit',$b->id)}}" class="btn btn-sm btn-warning"><i
                                             class="fa fa-pencil"></i></a>
-                                <a href="discount/delete/{{$b->id}}" class="btn btn-sm btn-danger confirm"><i
+                                <a href="{{route('discount.destroy',$b->id)}}" class="btn btn-sm btn-danger confirm"><i
                                             class="fa fa-trash"></i></a>
                             </div>
                         </td>

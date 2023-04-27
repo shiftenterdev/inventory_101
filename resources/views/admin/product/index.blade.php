@@ -36,8 +36,8 @@
                         <td>{{$p->title}}</td>
                         <td>{{$p->category_names}}</td>
                         <td>{{$p->brand->title}}</td>
-                        <td>{{money($p->purchase_price)}}</td>
-                        <td>{{money($p->sell_price)}}</td>
+                        <td>{{currency($p->purchase_price)}}</td>
+                        <td>{{currency($p->sell_price)}}</td>
                         <td>{{$p->quantity}}</td>
                         <td>{!! $p->status==1?'<i class="fa fa-check"></i>':'<i class="fa fa-times"></i>' !!}</td>
                         <td>

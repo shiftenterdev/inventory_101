@@ -31,9 +31,9 @@
                         <td>{{$b->slug}}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="role/edit/{{$b->id}}" class="btn btn-sm btn-warning"><i
+                                <a href="{{route('role.edit',$b->id)}}" class="btn btn-sm btn-warning"><i
                                             class="fa fa-pencil"></i></a>
-                                <a href="role/delete/{{$b->id}}" class="btn btn-sm btn-danger confirm"><i
+                                <a href="{{route('role.destroy',$b->id)}}" class="btn btn-sm btn-danger confirm"><i
                                             class="fa fa-trash"></i></a>
                             </div>
                         </td>

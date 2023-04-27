@@ -10,7 +10,8 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees  = Employee::get();
-        return view('admin.employee.index')->with(compact('employees'));
+        return view('admin.employee.index')
+            ->with(compact('employees'));
     }
 
     public function create()
@@ -29,12 +30,13 @@ class EmployeeController extends Controller
         return redirect()->back();
     }
 
-    public function edit(Request $request)
+    public function edit(Employee $employee)
     {
-
+        return view('admin.employee.edit')
+            ->with(compact('employee'));
     }
 
-    public function delete(Request $request,$id)
+    public function destroy(Request $request,$id)
     {
 
     }

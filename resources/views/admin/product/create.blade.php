@@ -11,17 +11,17 @@
             <legend>
                 Add Product
             </legend>
-            <form action="product/store" class="form-horizontal" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <form action="{{route('product.store')}}" class="form-horizontal" method="post">
+                @csrf
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Title</label>
+                    <label class="col-lg-2 control-label">{{__('Title')}}</label>
 
                     <div class="col-lg-8">
                         <input class="form-control" placeholder="Title" type="text" name="title">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Description</label>
+                    <label class="col-lg-2 control-label">{{__('Description')}}</label>
 
                     <div class="col-lg-8">
                         <textarea name="description" class="form-control" placeholder="Description"></textarea>
@@ -127,12 +127,6 @@
 
 @section('script')
     @parent
-    <script src="https://cdn.ckeditor.com/4.9.2/basic/ckeditor.js"></script>
-    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
-    <script>
-        CKEDITOR.replace( 'description' );
-        var prefix = "{{config('lfm.url_prefix')}}";
-        $('#lfm').filemanager('image', {prefix: prefix});
-    </script>
+    @include('admin.layout.js.ckeditor-file-upload')
 @stop
 

@@ -48,14 +48,15 @@ class TableController extends Controller
         return redirect('table');
     }
 
-    public function delete($id)
+    public function destroy(Table $table)
     {
-        Table::destroy($id);
+        $table->delete();
         return redirect()->back();
     }
 
     public function edit(Table $table)
     {
-        return view('admin.table.edit')->with(compact($table));
+        return view('admin.table.edit')
+            ->with(compact('table'));
     }
 }

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: USER
- * Date: 4/19/2018
- * Time: 3:28 PM
- */
 
 namespace App\Http\Controllers;
 
@@ -31,21 +25,30 @@ class FoodController extends Controller
     public function index()
     {
         return view('admin.food.index')->with([
-            'foods'=>Food::get(),
+            'foods' => Food::get(),
         ]);
     }
 
     public function create()
     {
         return view('admin.food.create')->with([
-            'categories'=>FoodCategory::get()
+            'categories' => FoodCategory::get()
         ]);
     }
 
     public function store(Request $request)
     {
-        $request->merge(['code'=>$this->code()]);
+        $request->merge(['code' => $this->code()]);
         Food::create($request->except('_token'));
-        return redirect('food');
+        return redirect()->route('food.index');
+    }
+
+    public function edit(Food $food)
+    {
+        return view('admin.food.edit')
+            ->with([
+                'food' => $food,
+                'categories' => FoodCategory::get()
+            ]);
     }
 }

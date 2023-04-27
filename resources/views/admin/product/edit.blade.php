@@ -1,17 +1,16 @@
 @extends('admin.layout.index')
 
-
 @section('content')
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
-        <li class="active">Product</li>
+        <li class="active">{{__('Product')}}</li>
     </ul>
     <div class="cN">
         <fieldset>
             <legend>
                 Update Product
             </legend>
-            <form action="product/update/{{$product->id}}" class="form-horizontal" method="post">
+            <form action="{{route('product.update',$product->id)}}" class="form-horizontal" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Title</label>
@@ -131,12 +130,6 @@
 @endsection
 @section('script')
     @parent
-    <script src="https://cdn.ckeditor.com/4.9.2/basic/ckeditor.js"></script>
-    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
-    <script>
-        CKEDITOR.replace( 'description' );
-        var prefix = "{{config('lfm.url_prefix')}}";
-        $('#lfm').filemanager('image', {prefix: prefix});
-    </script>
+    @include('admin.layout.js.ckeditor-file-upload')
 @stop
 
