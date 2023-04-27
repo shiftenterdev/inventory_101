@@ -27,64 +27,64 @@
             <div class="row">
                 <div class="col-md-2 ball">
                     <div class="n">{{$products}}</div>
-                    <a href="product"><img src="imgs/packing.svg" alt=""><span>Product</span></a>
+                    <a href="{{route('product.index')}}"><img src="{{asset('imgs/packing.svg')}}" alt=""><span>Product</span></a>
                 </div>
                 <div class="col-md-2 ball">
                     <div class="n">{{$foods}}</div>
-                    <a href="food"><img src="imgs/food.svg" alt=""><span>Food</span></a>
+                    <a href="{{route('food.index')}}"><img src="{{asset('imgs/food.svg')}}" alt=""><span>Food</span></a>
                 </div>
                 <div class="col-md-2 ball">
                     <div class="n">{{$tables}}</div>
-                    <a href="table"><img src="imgs/table.svg" alt=""><span>Table</span></a>
+                    <a href="{{route('table.index')}}"><img src="{{asset('imgs/table.svg')}}" alt=""><span>Table</span></a>
                 </div>
                 <div class="col-md-2 ball">
                     <div class="n">{{$categories}}</div>
-                    <a href="category"><img src="imgs/category.svg" alt=""><span>Category</span></a>
+                    <a href="{{route('category.index')}}"><img src="{{asset('imgs/category.svg')}}" alt=""><span>Category</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="discount"><img src="imgs/percentage.svg" alt=""><span>Discount</span></a>
+                    <a href="{{route('discount.index')}}"><img src="{{asset('imgs/percentage.svg')}}" alt=""><span>Discount</span></a>
                 </div>
                 <div class="col-md-2 ball">
                     <div class="n">{{$brands}}</div>
-                    <a href="brand"><img src="imgs/creative-market.svg" alt=""><span>Brand</span></a>
+                    <a href="{{route('brand.index')}}"><img src="{{asset('imgs/creative-market.svg')}}" alt=""><span>Brand</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="report"><img src="imgs/line-chart.svg" alt=""><span>Report</span></a>
+                    <a href="report"><img src="{{asset('imgs/line-chart.svg')}}" alt=""><span>Report</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="analysis"><img src="imgs/analytics.svg" alt=""><span>Analysis</span></a>
+                    <a href="analysis"><img src="{{asset('imgs/analytics.svg')}}" alt=""><span>Analysis</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="purchase"><img src="imgs/buy.svg" alt=""><span>Purchase</span></a>
+                    <a href="purchase"><img src="{{asset('imgs/buy.svg')}}" alt=""><span>Purchase</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="sell"><img src="imgs/sell.svg" alt=""><span>Sell</span></a>
+                    <a href="{{route('sales.index')}}"><img src="{{asset('imgs/sell.svg')}}" alt=""><span>Sales</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="payment"><img src="imgs/check.svg" alt=""><span>Payment</span></a>
+                    <a href="{{route('payment.index')}}"><img src="imgs/check.svg" alt=""><span>{{__('Payment')}}</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="sells-history"><img src="imgs/order.svg" alt=""><span>History</span></a>
+                    <a href="sells-history"><img src="imgs/order.svg" alt=""><span>{{__('History')}}</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="employee"><img src="imgs/employees.svg" alt=""><span>Employee</span></a>
+                    <a href="{{route('employee.index')}}"><img src="{{asset('imgs/employees.svg')}}" alt=""><span>Employee</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="stock"><img src="imgs/warehouse.svg" alt=""><span>Stock</span></a>
+                    <a href="{{route('stock.index')}}"><img src="{{asset('imgs/warehouse.svg')}}" alt=""><span>Stock</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="refund"><img src="imgs/money-refund.svg" alt=""><span>Refund</span></a>
+                    <a href="{{route('refund.index')}}"><img src="{{asset('imgs/money-refund.svg')}}" alt=""><span>Refund</span></a>
                 </div>
                 <div class="col-md-2 ball">
                     <div class="n">{{$customers}}</div>
-                    <a href="customer"><img src="imgs/employee.svg"><span>Customer</span></a>
+                    <a href="{{route('customers.index')}}"><img src="{{asset('imgs/employee.svg')}}"><span>Customer</span></a>
                 </div>
                 <div class="col-md-2 ball">
-                    <a href="settings"><img src="imgs/settings.svg" alt=""><span>Setting</span></a>
+                    <a href="{{route('settings.index')}}"><img src="{{asset('imgs/settings.svg')}}" alt=""><span>Setting</span></a>
                 </div>
                 <div class="col-md-2 ball">
                     <div class="n">{{$users}}</div>
-                    <a href="user"><img src="imgs/users.svg" alt=""><span>User</span></a>
+                    <a href="{{route('user.index')}}"><img src="{{asset('imgs/users.svg')}}" alt=""><span>User</span></a>
                 </div>
             </div>
         </div>

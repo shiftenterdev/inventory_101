@@ -10,7 +10,7 @@
         <fieldset>
             <legend>
                 Table List
-                <a href="table/create" class="btn btn-sm btn-primary nB pull-right"><i class="fa fa-plus"></i> New
+                <a href="{{route('table.create')}}" class="btn btn-sm btn-primary nB pull-right"><i class="fa fa-plus"></i> New
                     Table</a>
             </legend>
             <table class="table table-bordered">

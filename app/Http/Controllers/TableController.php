@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: USER
- * Date: 4/19/2018
- * Time: 3:31 PM
- */
 
 namespace App\Http\Controllers;
 
@@ -14,20 +8,6 @@ use Illuminate\Http\Request;
 
 class TableController extends Controller
 {
-
-    private function code()
-    {
-        $product_code = Table::orderBy('id', 'desc')->pluck('table_no');
-        if (empty($product_code)) {
-            $product_code = 'T11';
-        } else {
-            $product_code = str_replace('T', '', $product_code);
-            $product_code = 'T'.(intval($product_code) + 1);
-        }
-
-        return $product_code;
-    }
-
 
     public function index()
     {
@@ -43,7 +23,6 @@ class TableController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge(['table_no'=>$this->code()]);
         Table::create($request->except('_token'));
         return redirect('table');
     }
@@ -58,5 +37,18 @@ class TableController extends Controller
     {
         return view('admin.table.edit')
             ->with(compact('table'));
+    }
+
+    public function update(Request $request, Table $table)
+    {
+        $table->update([
+            'to_seat' => $request->to_seat,
+            'status' => $request->status,
+            'table_no' => $request->table_no
+        ]);
+        return redirect()->route('table.index')
+            ->with([
+                'success' => 'Table updated'
+            ]);
     }
 }

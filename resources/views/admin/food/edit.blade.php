@@ -8,9 +8,7 @@
     </ul>
     <div class="cN">
         <fieldset>
-            <legend>
-                Add Food
-            </legend>
+            <legend>Add Food</legend>
             <form action="{{route('food.update',$food->id)}}" class="form-horizontal" method="post">
                 @csrf
 
@@ -32,21 +30,21 @@
                     <label class="col-lg-2 control-label">{{__('Title')}}</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="{{__('Title')}}" type="text" name="title">
+                        <input class="form-control" placeholder="{{__('Title')}}" type="text" name="title" value="{{$food->title}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">{{__('Description')}}</label>
 
                     <div class="col-lg-8">
-                        <textarea name="description" class="form-control" placeholder="Description" rows="10"></textarea>
+                        <textarea name="description" class="form-control" placeholder="Description" rows="10">{{$food->description}}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">{{__('Price')}}</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="{{__('Price')}}" type="text" name="price">
+                        <input class="form-control" placeholder="{{__('Price')}}" type="text" name="price" value="{{$food->price}}">
                     </div>
                 </div>
 
@@ -55,14 +53,14 @@
 
                     <div class="col-lg-8">
                         <div class="radio">
-                            <input name="status" id="radio1" value="1" checked="" type="radio">
+                            <input name="status" id="radio1" value="1" {{$food->status==1?'checked':''}} type="radio">
                             <label for="radio1">
                                 <mark></mark>
                                 {{__('Active')}}
                             </label>
                         </div>
                         <div class="radio">
-                            <input name="status" id="radio2" value="2" type="radio">
+                            <input name="status" id="radio2" value="2" {{$food->status==2?'checked':''}} type="radio">
                             <label for="radio2">
                                 <mark></mark>
                                 {{__('Inactive')}}

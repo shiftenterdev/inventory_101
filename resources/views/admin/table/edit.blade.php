@@ -16,6 +16,14 @@
                 @method('PUT')
 
                 <div class="form-group">
+                    <label class="col-lg-2 control-label" for="tableNo">Table No</label>
+
+                    <div class="col-lg-8">
+                        <input class="form-control" placeholder="Table No" type="text" name="table_no" id="tableNo" value="{{$table->table_no}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-lg-2 control-label">To Seat</label>
 
                     <div class="col-lg-8">
@@ -29,14 +37,14 @@
 
                     <div class="col-lg-8">
                         <div class="radio">
-                            <input name="status" id="radio1" value="1" checked="" type="radio">
+                            <input name="status" id="radio1" value="1" {{$table->status==1?'checked':''}} type="radio">
                             <label for="radio1">
                                 <mark></mark>
                                 Free
                             </label>
                         </div>
                         <div class="radio">
-                            <input name="status" id="radio2" value="2" type="radio">
+                            <input name="status" id="radio2" value="2" {{$table->status==2?'checked':''}} type="radio">
                             <label for="radio2">
                                 <mark></mark>
                                 Closed

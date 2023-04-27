@@ -11,9 +11,15 @@
             <legend>
                 Add Table
             </legend>
-            <form action="table/store" class="form-horizontal" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <form action="{{route('table.store')}}" class="form-horizontal" method="post">
+                @csrf
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" for="tableNo">Table No</label>
 
+                    <div class="col-lg-8">
+                        <input class="form-control" placeholder="Table No" type="text" name="table_no" id="tableNo">
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="col-lg-2 control-label">To Seat</label>
