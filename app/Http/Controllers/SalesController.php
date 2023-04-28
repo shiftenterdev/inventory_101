@@ -23,7 +23,7 @@ class SalesController extends Controller
 
     public function index(Request $request)
     {
-        $sales = Invoice::where('type', 'sell')
+        $sales = Invoice::where('type', 'sales')
             ->where('status', 1)->get();
 
         return view('admin.sales.index')
@@ -41,7 +41,7 @@ class SalesController extends Controller
                 $invoice->other_discount = 0;
                 $invoice->delivery_charge = 0;
                 $invoice->tax = 0;
-                $invoice->type = 'sell';
+                $invoice->type = 'sales';
                 $invoice->status = 0;
                 $invoice->save();
             }

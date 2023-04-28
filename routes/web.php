@@ -82,6 +82,7 @@ Route::middleware('backend.auth')->group(function () {
     Route::resource('refund', RefundController::class);
     Route::resource('employee', EmployeeController::class);
     Route::resource('customers', CustomerController::class);
+    Route::post('customers/search', [CustomerController::class,'search']);
     Route::resource('user', UserController::class);
     Route::resource('role', RoleController::class);
     Route::resource('report', ReportController::class);

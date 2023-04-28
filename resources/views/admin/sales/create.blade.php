@@ -141,11 +141,18 @@
 @section('script')
     @parent
     <script>
-        var INVOICE_NO = "{{request('invoice_no')}}";
+        let INVOICE_NO = "{{request('invoice_no')}}",
+            productListSelector = $('#productList');
+
+        let refreshProductTable = function (formData) {
+            axios.put('purchase/update', formData).then(() => {
+                reloadTable();
+            });
+        }
 
         $("#cMobile").autocomplete({
             source: function (request, response) {
-                $.post("customer/search", request, response);
+                $.post("customers/search", request, response);
             },
             minLength: 1,
             focus: function (event, ui) {
@@ -173,30 +180,30 @@
 
         $('.top-product').on('click',function(){
             load.on();
-            var formData = {
+            let formData = {
                 code: $(this).data('code'),
                 invoice_no: INVOICE_NO,
                 type: 'add'
             };
-            $.post('sales/update', formData).done(function (result) {
+            axios.put('sales/update', formData).then(()=> {
                 $('.spo').val('');
                 reloadTable();
             });
         });
 
-        $('#productList').on('input', '#product', function () {
+        productListSelector.on('input', '#product', function () {
             $(this).autocomplete({
                 source: function (request, response) {
                     $.post("product/search", {invoice_no: INVOICE_NO, term: request.term}, response);
                 },
                 minLength: 1,
                 select: function (event, ui) {
-                    var formData = {
+                    let formData = {
                         code: ui.item.code,
                         invoice_no: INVOICE_NO,
                         type: 'add'
                     };
-                    $.post('sales/update', formData).done(function (result) {
+                    axios.put('sales/update', formData).then(()=> {
                         $('.spo').val('');
                         reloadTable();
                     });
@@ -213,100 +220,90 @@
             };
         });
 
-        $('#productList').on('change', '#pro_code', function () {
+        productListSelector.on('change', '#pro_code', function () {
             // e.preventDefault();
             if ($(this).val() !== '') {
                 load.on();
-                var product = {
+                let product = {
                     code: $(this).val(),
                     _token: $('meta[name="csrf-token"]').attr('content')
                 };
 
-                $.post('sell/product/add', product).done(function (result) {
+                axios.post('sell/product/add',product).then(() => {
                     $('.spo').val('');
                     reloadTable();
                 });
             }
         });
 
-        $('#productList').on('click', '.remove', function () {
+        productListSelector.on('click', '.remove', function () {
             load.on();
-            var formData = {
+            let formData = {
                 code: $(this).data('code'),
                 invoice_no: INVOICE_NO,
                 type: 'remove'
             };
-            $.post('sales/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData);
         });
 
-        $('#productList').on('change', '.quantity', function () {
+        productListSelector.on('change', '.quantity', function () {
             load.on();
-            var formData = {
+            let formData = {
                 code: $(this).data('code'),
                 invoice_no: INVOICE_NO,
                 type: 'quantity',
                 quantity: $(this).val()
             };
-            $.post('sales/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData);
         });
 
-        $('#productList').on('change', '.discount', function () {
+        productListSelector.on('change', '.discount', function () {
             load.on();
-            var formData = {
+            let formData = {
                 code: $(this).data('code'),
                 invoice_no: INVOICE_NO,
                 type: 'product_discount',
                 discount: $(this).val()
             };
-            $.post('sales/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData);
         });
-        $('#productList').on('change', 'input[name=other_discount]', function () {
+        productListSelector.on('change', 'input[name=other_discount]', function () {
             load.on();
-            var formData = {
+            let formData = {
                 invoice_no: INVOICE_NO,
                 type: 'other_discount',
                 other_discount: $(this).val()
             };
-            $.post('sales/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData);
         });
 
-        $('#productList').on('change', 'input[name=tax]', function () {
+        productListSelector.on('change', 'input[name=tax]', function () {
             load.on();
-            var formData = {
+            let formData = {
                 invoice_no: INVOICE_NO,
                 type: 'tax',
                 tax: $(this).val()
             };
-            $.post('sales/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData);
         });
 
-        $('#productList').on('change', 'input[name=delivery_charge]', function () {
+        productListSelector.on('change', 'input[name=delivery_charge]', function () {
             load.on();
-            var formData = {
+            let formData = {
                 invoice_no: INVOICE_NO,
                 type: 'delivery_charge',
                 delivery_charge: $(this).val()
             };
-            $.post('sales/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData);
         });
-        var reloadTable = function () {
-            var formData = {
+
+        let reloadTable = function () {
+            let formData = {
                 invoice_no: INVOICE_NO,
                 type: 'products'
             };
-            $('#productList').load('sales/update', formData, function () {
+            axios.put('purchase/update', formData).then(response => {
+                $('#productList').html(response.data);
                 load.off();
             });
         }

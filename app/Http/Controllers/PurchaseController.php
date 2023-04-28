@@ -110,7 +110,7 @@ class PurchaseController extends Controller
             case 'products':
                 $invoice = Invoice::where('invoice_no', $request->invoice_no)->first();
                 return view('admin.common.product_list')
-                    ->with(compact('products', 'invoice'));
+                    ->with(compact('invoice'));
                 break;
 
             case 'add':
@@ -159,7 +159,7 @@ class PurchaseController extends Controller
             case 'quantity':
                 InvoiceProduct::where('product_code', $request->code)
                     ->where('invoice_no', $request->invoice_no)
-                    ->update(['discount' => $request->quantity]);
+                    ->update(['quantity' => $request->quantity]);
                 break;
 
             case 'tax':

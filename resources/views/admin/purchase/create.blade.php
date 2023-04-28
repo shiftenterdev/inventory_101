@@ -2,30 +2,35 @@
 
 @section('content')
     <style>
-        .pl{
+        .pl {
             padding: 0;
             list-style: none;
         }
-        .pl li{
+
+        .pl li {
             border: 1px solid #ddd;
             border-bottom: none;
             /*padding: 7px 10px;*/
         }
-        .pl li:hover{
+
+        .pl li:hover {
             background: #efefef;
             /*cursor: pointer;*/
         }
-        .pl li:last-child{
+
+        .pl li:last-child {
             border-bottom: 1px solid #ddd;
         }
-        .pl li a{
+
+        .pl li a {
             color: #444;
             display: block;
             text-decoration: none;
             font-weight: 600;
             padding: 7px 10px;
         }
-        small{
+
+        small {
             font-size: 14px;
             text-decoration: underline;
         }
@@ -43,13 +48,15 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2 class="panel-title">
-                            Popular Products <button class="bt btn-info btn-xs add-new-product">Add New Product</button>
+                            Popular Products
+                            <button class="bt btn-info btn-xs add-new-product">Add New Product</button>
                         </h2>
                     </div>
                     <div class="panel-body">
                         <ul class="pl">
                             @foreach($products as $p)
-                                <li><a href="javascript:" data-code="{{$p->code}}" class="top-product">{{$p->title}}</a></li>
+                                <li><a href="javascript:" data-code="{{$p->code}}" class="top-product">{{$p->title}}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -77,30 +84,30 @@
                             @include('admin.common.product_list')
                         </div>
                         @if(count($invoice->payments)>0)
-                        <div id="payment">
-                            <legend>Payment</legend>
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr class="t-imp">
-                                    <th>SL</th>
-                                    <th>Amount</th>
-                                    <th>Method</th>
-                                    <th>Trx No</th>
-                                    <th>Date</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($invoice->payments as $k => $p)
-                                    <tr>
-                                        <td>{{$k+1}}</td>
-                                        <td>{{$p->amount}}</td>
-                                        <td>{{$p->method}}</td>
-                                        <td>{{$p->trx_id}}</td>
-                                        <td>{{$p->updated_at}}</td>
+                            <div id="payment">
+                                <legend>Payment</legend>
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr class="t-imp">
+                                        <th>SL</th>
+                                        <th>Amount</th>
+                                        <th>Method</th>
+                                        <th>Trx No</th>
+                                        <th>Date</th>
                                     </tr>
-                                @endforeach
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($invoice->payments as $k => $p)
+                                        <tr>
+                                            <td>{{$k+1}}</td>
+                                            <td>{{$p->amount}}</td>
+                                            <td>{{$p->method}}</td>
+                                            <td>{{$p->trx_id}}</td>
+                                            <td>{{$p->updated_at}}</td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
                         @endif
                         <div class="text-center">
                             <button type="button" class="btn btn-danger openRight"><i class="fa fa-money"></i> Payment
@@ -115,40 +122,40 @@
     </fieldset>
     @extends('admin.layout.right',['title'=>'Order Payment'])
     @section('slot')
-    <form action="{{route('payment.store')}}" class="form-horizontal" method="post">
-        {{csrf_field()}}
-        <input type="hidden" name="invoice_no" value="{{request()->invoice}}">
-        <div class="first-option">
-            <div class="form-group">
-                <label for="">Amount</label>
-                <input type="text" name="amount" class="form-control">
+        <form action="{{route('payment.store')}}" class="form-horizontal" method="post">
+            {{csrf_field()}}
+            <input type="hidden" name="invoice_no" value="{{request()->invoice}}">
+            <div class="first-option">
+                <div class="form-group">
+                    <label for="">Amount</label>
+                    <input type="text" name="amount" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Method</label>
+                    <select name="payment_method" id="" class="form-control select">
+                        <option value="Cash">Cash</option>
+                        <option value="Card">Card</option>
+                        <option value="bKash">bKash</option>
+                        <option value="Cheque">Cheque</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Trx ID/Chq No</label>
+                    <input type="text" name="trx_id" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Other Info</label>
+                    <input type="text" class="form-control" name="info">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="">Method</label>
-                <select name="payment_method" id="" class="form-control select">
-                    <option value="Cash">Cash</option>
-                    <option value="Card">Card</option>
-                    <option value="bKash">bKash</option>
-                    <option value="Cheque">Cheque</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Trx ID/Chq No</label>
-                <input type="text" name="trx_id" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="">Other Info</label>
-                <input type="text" class="form-control" name="info">
-            </div>
-        </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save Payment</button>
-        </div>
-    </form>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save Payment</button>
+            </div>
+        </form>
 
-@stop
-<div id="myModal" class="modal fade" role="dialog">
+    @stop
+    <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -209,11 +216,18 @@
     @parent
     <script>
 
-        var INVOICE_NO = "{{request('invoice_no')}}";
+        let INVOICE_NO = "{{request('invoice_no')}}",
+            productListSelector = $('#productList');
+
+        let refreshProductTable = function (formData) {
+            axios.put('purchase/update', formData).then(response => {
+                reloadTable();
+            });
+        }
 
         $("#cMobile").autocomplete({
             source: function (request, response) {
-                $.post("customer/search", request, response);
+                $.post("customers/search", request, response);
             },
             minLength: 2,
             focus: function (event, ui) {
@@ -239,7 +253,7 @@
                 .appendTo(ul);
         };
 
-        $('.top-product').on('click',function(){
+        $('.top-product').on('click', function () {
             load.on();
             let formData = {
                 code: $(this).data('code'),
@@ -247,21 +261,15 @@
                 type: 'add',
                 _token: $('meta[name="csrf-token"]').attr('content')
             };
-            fetch('purchase/update', {
-                method: 'PUT',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8',
-                },
-            })
-                .then((response) => response.json())
-                .then((json) => {
-                    $('.spo').val('');
-                    reloadTable();
-                });
+            axios.put('purchase/update', formData).then(function (response) {
+                $('.spo').val('');
+                reloadTable();
+            }).catch(function (error) {
+                console.log(error);
+            });
         });
 
-        $('#productList').on('input', '#product', function () {
+        productListSelector.on('input', '#product', function () {
             $(this).autocomplete({
                 source: function (request, response) {
                     $.post("product/search", {invoice_no: INVOICE_NO, term: request.term}, response);
@@ -290,35 +298,31 @@
             };
         });
 
-        $('#productList').on('change', '#pro_code', function () {
-            // e.preventDefault();
+        productListSelector.on('change', '#pro_code', function () {
             if ($(this).val() !== '') {
                 load.on();
-                var product = {
-                    code: $(this).val(),
-                    _token: $('meta[name="csrf-token"]').attr('content')
+                let product = {
+                    code: $(this).val()
                 };
 
-                $.post('purchase/product/add', product).done(function (result) {
+                axios.post('purchase/product/add',product).then(response => {
                     $('.spo').val('');
                     reloadTable();
-                });
+                })
             }
         });
 
-        $('#productList').on('click', '.remove', function () {
+        productListSelector.on('click', '.remove', function () {
             load.on();
-            var formData = {
+            let formData = {
                 code: $(this).data('code'),
                 invoice_no: INVOICE_NO,
                 type: 'remove'
             };
-            $.post('purchase/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData);
         });
 
-        $('#productList').on('change', '.price', function () {
+        productListSelector.on('change', '.price', function () {
             load.on();
             var formData = {
                 code: $(this).data('code'),
@@ -326,12 +330,10 @@
                 type: 'price',
                 price: $(this).val()
             };
-            $.post('purchase/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData)
         });
 
-        $('#productList').on('change', '.quantity', function () {
+        productListSelector.on('change', '.quantity', function () {
             load.on();
             var formData = {
                 code: $(this).data('code'),
@@ -339,12 +341,10 @@
                 type: 'quantity',
                 quantity: $(this).val()
             };
-            $.post('purchase/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData);
         });
 
-        $('#productList').on('change', '.discount', function () {
+        productListSelector.on('change', '.discount', function () {
             load.on();
             var formData = {
                 code: $(this).data('code'),
@@ -352,82 +352,76 @@
                 type: 'product_discount',
                 discount: $(this).val()
             };
-            $.post('purchase/update', formData).done(function (result) {
+            axios.put('purchase/update', formData).then(response => {
                 reloadTable();
             });
         });
-        $('#productList').on('change', 'input[name=other_discount]', function () {
+
+        productListSelector.on('change', 'input[name=other_discount]', function () {
             load.on();
-            var formData = {
+            let formData = {
                 invoice_no: INVOICE_NO,
                 type: 'other_discount',
                 other_discount: $(this).val()
             };
-            $.post('purchase/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData);
         });
 
-        $('#productList').on('change', 'input[name=tax]', function () {
+        productListSelector.on('change', 'input[name=tax]', function () {
             load.on();
-            var formData = {
+            let formData = {
                 invoice_no: INVOICE_NO,
                 type: 'tax',
                 tax: $(this).val()
             };
-            $.post('purchase/update', formData).done(function (result) {
-                reloadTable();
-            });
+            refreshProductTable(formData);
         });
 
-        $('#productList').on('click', '.btn-quantity', function () {
-            var type = $(this).data('type');
-            var field = $(this).data('field');
-            field = $('input[name="'+field+']"]');
-            var current_value = parseFloat(field.val());
-            if(type=='mmp'){
-                field.val(current_value+1);
-                alert('ok');
-                // if(current_value > 1){
-                    field.val(current_value+1);
-                    // field.val(current_value+1);
-                // }
-            }else{
-                field.val(current_value-1);
+        productListSelector.on('click', '.btn-quantity', function () {
+            let type = $(this).data('type');
+            let field = $(this).data('field');
+            field = $('input[name="' + field + ']"]');
+            let current_value = parseFloat(field.val());
+            if (type === 'minus') {
+                field.val(current_value - 1);
+            } else {
+                field.val(current_value + 1);
             }
         });
 
-        $('#productList').on('change', 'input[name=delivery_charge]', function () {
+        productListSelector.on('change', 'input[name=delivery_charge]', function () {
             load.on();
-            var formData = {
+            let formData = {
                 invoice_no: INVOICE_NO,
                 type: 'delivery_charge',
                 delivery_charge: $(this).val()
             };
-            $.post('purchase/update', formData).done(function (result) {
+            axios.put('purchase/update', formData).then(response => {
                 reloadTable();
             });
         });
-        var reloadTable = function () {
-            var formData = {
+
+        let reloadTable = function () {
+            let formData = {
                 invoice_no: INVOICE_NO,
                 type: 'products'
             };
-            $('#productList').load('purchase/update', formData, function () {
+            axios.put('purchase/update', formData).then(response => {
+                $('#productList').html(response.data);
                 load.off();
             });
         }
 
-        $('.add-new-product').on('click',function(){
+        $('.add-new-product').on('click', function () {
             $('#myModal').modal('show');
         });
 
-        $('form.save-product').on('submit',function(e){
+        $('form.save-product').on('submit', function (e) {
             e.preventDefault();
-            var data = $(this).serializeArray();
-            var url = $(this).attr('action');
+            let data = $(this).serializeArray();
+            let url = $(this).attr('action');
             $('#myModal').modal('hide');
-            $.post(url,data,function(result){
+            $.post(url, data, function (result) {
                 alert(result);
             });
         })

@@ -27,14 +27,14 @@
                  <td>
                     <div class="input-group">
                       <span class="input-group-btn">
-                          <button type="button" class="btn btn-warning btn-quantity" data-type="mmp" data-field="quantity[{{$k}}]">
+                          <button type="button" class="btn btn-warning btn-quantity" data-type="minus" data-field="quantity[{{$k}}]">
                               <span class="fa fa-minus"></span>
                           </button>
                       </span>
                       <input type="text" name="quantity[{{$k}}]" class="form-control input-sm quantity" data-code="{{$t->product->code}}"
-                  value="{{$t->quantity}}">
+                  value="{{$t->quantity ?? '1'}}">
                       <span class="input-group-btn">
-                          <button type="button" class="btn btn-success btn-quantity" data-type="plus" data-field="quantity[{{$k}}">
+                          <button type="button" class="btn btn-success btn-quantity" data-type="plus" data-field="quantity[{{$k}}]">
                               <span class="fa fa-plus"></span>
                           </button>
                       </span>
