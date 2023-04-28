@@ -12,6 +12,7 @@ class ProductController extends Controller
 {
 
     use CoreTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -42,13 +43,18 @@ class ProductController extends Controller
     {
         if ($request->ajax()) {
             $request->merge(['code' => self::productCode()]);
-            Product::create($request->except('_token', 'category_id'))->categories()->sync($request->category_id);
+            Product::create($request->except('_token', 'category_id'))
+                ->categories()
+                ->sync($request->category_id);
             return response('Product Added Successfully', 200);
         }
         $request->merge(['code' => self::productCode()]);
         $product = Product::create($request->except('_token', 'category_id'));
         Product::find($product)->categoties()->sync($request->category_id);
-        return redirect('product');
+        return redirect()->route('product.index')
+            ->with([
+                'success' => 'Product Added Successfully'
+            ]);
     }
 
     /**
@@ -83,7 +89,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->merge(['code' => self::productCode()]);
+        $product->update($request->except('_token', 'category_id'));
+        $product->categories()
+            ->sync($request->category_id);
+        return redirect()->route('product.index')
+            ->with([
+                'success' => 'Product Updated Successfully'
+            ]);
     }
 
     /**
