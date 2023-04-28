@@ -1,6 +1,5 @@
 @extends('admin.layout.index')
 
-
 @section('content')
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
@@ -11,8 +10,8 @@
             <legend>
                 Add Brand
             </legend>
-            <form action="brand/store" class="form-horizontal" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <form action="{{route('brand.store')}}" class="form-horizontal" method="post">
+                @csrf
 
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Title</label>
@@ -53,9 +52,5 @@
 
 @section('script')
     @parent
-    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
-    <script>
-        var prefix = "{{config('lfm.url_prefix')}}";
-        $('#lfm').filemanager('image', {prefix: prefix});
-    </script>
+    @include('admin.layout.js.lfm-standalone')
 @stop

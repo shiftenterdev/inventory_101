@@ -1,5 +1,4 @@
 <div class="list-group sidebar">
-
     <a href="{{route('sales.create')}}" class="list-group-item {{Request::is('sales/create')?'active':''}}">
         <i class="fa fa-shopping-bag"></i> New Sell</a>
     <a href="{{route('purchase.create')}}" class="list-group-item {{Request::is('purchase/create')?'active':''}}">
@@ -7,7 +6,6 @@
     <a href="{{route('payment.index')}}" class="list-group-item {{Request::is('payment')?'active':''}}">
         <i class="fa fa-money"></i> Invoice Payment</a>
     <hr>
-
     <a href="{{route('sales.index')}}" class="list-group-item {{Request::is('sales')?'active':''}}">
         <i class="fa fa-list-alt"></i> Sales List</a>
     <a href="{{route('purchase.index')}}" class="list-group-item {{Request::is('purchase')?'active':''}}">
@@ -33,7 +31,6 @@
     <hr>
     <a href="{{route('report.index')}}" class="list-group-item {{Request::segment(1)=='report'?'active':''}}">
         <i class="fa fa-bar-chart"></i> Report</a>
-
     <hr>
     <a href="{{route('stock.index')}}" class="list-group-item {{Request::segment(1)=='stock'?'active':''}}">
         <i class="fa fa-cubes"></i> Stock</a>

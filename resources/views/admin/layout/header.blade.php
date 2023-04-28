@@ -23,7 +23,7 @@
                 </form>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <i class="fa fa-flag"></i> {{'Language'}}({{session()->get('locale')}})
+                        <i class="fa fa-flag"></i> {{'Language'}}({{Str::upper(session()->get('locale')??'EN')}})
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="{{route('language','en')}}">English</a></li>
@@ -39,7 +39,7 @@
                         <li><a href="{{route('user.index')}}">{{__('Users')}}</a></li>
                         <li><a href="{{route('product.index')}}">{{__('Products')}}</a></li>
                         <li class="divider"></li>
-                        <li><a href="settings/update-password">{{__('Update Password')}}</a></li>
+                        <li><a href="{{route('settings.index')}}">{{__('Update Password')}}</a></li>
                         <li class="divider"></li>
                         <li><a href="{{route('logout')}}">{{__('Logout')}}</a></li>
                     </ul>

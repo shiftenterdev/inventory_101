@@ -77,7 +77,9 @@ Route::middleware('backend.auth')->group(function () {
     Route::resource('food-category', FoodCategoryController::class);
     Route::resource('purchase', PurchaseController::class);
     Route::resource('payment', PaymentController::class);
-    Route::resource('settings', SettingsController::class);
+    Route::resource('settings', SettingsController::class)->only(['index','store']);
+    Route::post('settings/update/password', [SettingsController::class,'updatePassword'])
+        ->name('settings.update.password');
     Route::resource('permission', PermissionController::class);
     Route::resource('refund', RefundController::class);
     Route::resource('employee', EmployeeController::class);

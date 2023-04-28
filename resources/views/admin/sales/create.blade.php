@@ -160,7 +160,6 @@
                 return false;
             },
             select: function (event, ui) {
-//                alert(ui.item.address);
                 $('input[name=mobile]').val(ui.item.mobile);
                 $('input[name=address]').val(ui.item.address);
                 $('input[name=name]').val(ui.item.name);
@@ -221,7 +220,6 @@
         });
 
         productListSelector.on('change', '#pro_code', function () {
-            // e.preventDefault();
             if ($(this).val() !== '') {
                 load.on();
                 let product = {

@@ -1,8 +1,6 @@
 @extends('admin.layout.index')
 
-
 @section('content')
-
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
         <li class="active">Settings</li>
@@ -13,15 +11,15 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2 class="panel-title">
-                            Store Settings
+                            {{__('Store Settings')}}
                         </h2>
                     </div>
                     <div class="panel-body">
                         <form action="{{route('settings.store')}}" class="form-horizontal" method="post">
-                            {{csrf_field()}}
+                            @csrf
 
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Currency</label>
+                                <label class="col-lg-3 control-label">{{__('Currency')}}</label>
 
                                 <div class="col-lg-6">
                                     <input class="form-control" placeholder="Currency" type="text"
@@ -29,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Invoice Prefix</label>
+                                <label class="col-lg-3 control-label">{{__('Invoice Prefix')}}</label>
 
                                 <div class="col-lg-6">
                                     <input class="form-control" placeholder="Invoice Prefix" type="text"
@@ -38,17 +36,18 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Order Prefix</label>
+                                <label class="col-lg-3 control-label">{{__('Order Prefix')}}</label>
 
                                 <div class="col-lg-6">
-                                    <input class="form-control" placeholder="Order Prefix" type="text" name="order_prefix"
-                                    value="{{systemConfig('order_prefix')}}">
+                                    <input class="form-control" placeholder="Order Prefix" type="text"
+                                           name="order_prefix"
+                                           value="{{systemConfig('order_prefix')}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-lg-6 col-lg-offset-3">
-                                    <button type="submit" class="btn btn-primary">Update Store</button>
+                                    <button type="submit" class="btn btn-primary">{{__('Update Store')}}</button>
                                 </div>
                             </div>
                         </form>
@@ -59,15 +58,15 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2 class="panel-title">
-                            Update Password
+                            {{__('Update Password')}}
                         </h2>
                     </div>
                     <div class="panel-body">
-                        <form action="settings/password" class="form-horizontal" method="post">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <form action="{{route('settings.update.password')}}" class="form-horizontal" method="post">
+                            @csrf
 
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Current Password</label>
+                                <label class="col-lg-3 control-label">{{__('Current Password')}}</label>
 
                                 <div class="col-lg-6">
                                     <input class="form-control" placeholder="Current Password" type="password"
@@ -76,15 +75,16 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">New Password</label>
+                                <label class="col-lg-3 control-label">{{__('New Password')}}</label>
 
                                 <div class="col-lg-6">
-                                    <input class="form-control" placeholder="New Password" type="password" name="new_password">
+                                    <input class="form-control" placeholder="New Password" type="password"
+                                           name="new_password">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Confirm Password</label>
+                                <label class="col-lg-3 control-label">{{__('Confirm Password')}}</label>
 
                                 <div class="col-lg-6">
                                     <input class="form-control" placeholder="Confirm Password" type="password"
@@ -94,7 +94,7 @@
 
                             <div class="form-group">
                                 <div class="col-lg-6 col-lg-offset-3">
-                                    <button type="submit" class="btn btn-primary" disabled>Update Password</button>
+                                    <button type="submit" class="btn btn-primary" disabled>{{__('Update Password')}}</button>
                                 </div>
                             </div>
                         </form>
@@ -102,7 +102,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
 

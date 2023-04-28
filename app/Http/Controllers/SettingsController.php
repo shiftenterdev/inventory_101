@@ -20,22 +20,18 @@ class SettingsController extends Controller
         return view('admin.settings.index');
     }
 
-    public function password(Request $request)
+    public function updatePassword(Request $request)
     {
-        $input = $request->all();
+        $input = $request->except('_token');
         if ($input['new_password'] = $input['confirm_password']) {
             $current_pass = User::where('id', auth()->user()->id)
-                ->pluck('password');
+                ->first()->password;
             if (password_verify($input['new_password'], $current_pass)) {
-                User::where('id', auth()->user()->id)->update(['password' => bcrypt($input['new_password'])]);
-
-                return redirect()->route('settings.index');
-            } else {
-                return redirect()->route('settings.index');
+                User::where('id', auth()->user()->id)
+                    ->update(['password' => bcrypt($input['new_password'])]);
             }
-        } else {
-            return redirect()->route('settings.index');
         }
+        return redirect()->route('settings.index');
     }
 
     public function store(Request $request)

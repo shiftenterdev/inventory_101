@@ -1,6 +1,5 @@
 @extends('admin.layout.index')
 
-
 @section('content')
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
@@ -54,9 +53,5 @@
 
 @section('script')
     @parent
-    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
-    <script>
-        var prefix = "{{config('lfm.url_prefix')}}";
-        $('#lfm').filemanager('image', {prefix: prefix});
-    </script>
+    @include('admin.layout.js.lfm-standalone')
 @stop
