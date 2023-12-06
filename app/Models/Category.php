@@ -9,6 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'parent_id'];
+
     public function sub_category()
     {
         return $this->hasMany($this,'parent_id','id');
@@ -26,7 +28,7 @@ class Category extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class,'product_category');
+        return $this->belongsToMany(Product::class,'product_categories');
     }
 
     public function getFullCategoryAttribute()

@@ -11,12 +11,8 @@
             <legend>
                 Add Food Category
             </legend>
-            <form action="food/category/store" class="form-horizontal" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-
-
-
+            <form action="{{route('food-category.store')}}" class="form-horizontal" method="post">
+                @csrf
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Title</label>
 

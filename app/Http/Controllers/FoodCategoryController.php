@@ -29,7 +29,7 @@ class FoodCategoryController extends Controller
     public function store(Request $request)
     {
         FoodCategory::create($request->except('_token'));
-        return redirect('food/category');
+        return redirect()->route('food-category');
     }
 
     public function edit(FoodCategory $foodCategory)

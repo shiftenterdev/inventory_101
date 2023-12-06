@@ -68,8 +68,8 @@
                     <h4 class="modal-title">New Category</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="category/store" class="form-horizontal" method="post">
-                        {{csrf_field()}}
+                    <form action="{{route('category.store')}}" class="form-horizontal" method="post">
+                        @csrf
                         <input type="hidden" name="parent_id">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Title</label>
